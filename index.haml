@@ -1,0 +1,23 @@
+%form{ method: "POST" }
+  %textarea{ name: "sql", rows: 10, cols: 80 }
+    = params["sql"]
+  %br
+  %button{ type: "submit", formaction: "/run" }
+    Run
+  %button{ type: "submit", formaction: "/export" }
+    Export
+
+- if @rows
+  %table
+    %thead
+      %tr
+        - @rows.fields.each do |field|
+          %th
+            = field
+    %tbody
+      - @rows.each do |row|
+        %tr
+          - row.each do |key, value|
+            %td
+              = value
+
